@@ -1,12 +1,4 @@
 ﻿  main.cpp
-d:\mmcs\учеба\7 семестр\графика\лабы\lab12\opengl-viewtransformations\viewtransformations\main.cpp(40): warning C4244: =: преобразование "double" в "float", возможна потеря данных
-d:\mmcs\учеба\7 семестр\графика\лабы\lab12\opengl-viewtransformations\viewtransformations\main.cpp(41): warning C4244: =: преобразование "double" в "float", возможна потеря данных
-d:\mmcs\учеба\7 семестр\графика\лабы\lab12\opengl-viewtransformations\viewtransformations\main.cpp(42): warning C4244: =: преобразование "double" в "float", возможна потеря данных
-d:\mmcs\учеба\7 семестр\графика\лабы\lab12\opengl-viewtransformations\viewtransformations\main.cpp(100): warning C4305: аргумент: усечение из "double" к "GLfloat"
-d:\mmcs\учеба\7 семестр\графика\лабы\lab12\opengl-viewtransformations\viewtransformations\main.cpp(154): warning C4244: аргумент: преобразование "double" в "GLfloat", возможна потеря данных
-d:\mmcs\учеба\7 семестр\графика\лабы\lab12\opengl-viewtransformations\viewtransformations\main.cpp(155): warning C4244: аргумент: преобразование "double" в "GLfloat", возможна потеря данных
-d:\mmcs\учеба\7 семестр\графика\лабы\lab12\opengl-viewtransformations\viewtransformations\main.cpp(156): warning C4244: аргумент: преобразование "double" в "GLfloat", возможна потеря данных
-d:\mmcs\учеба\7 семестр\графика\лабы\lab12\opengl-viewtransformations\viewtransformations\main.cpp(160): warning C4305: аргумент: усечение из "double" к "GLfloat"
-d:\mmcs\учеба\7 семестр\графика\лабы\lab12\opengl-viewtransformations\viewtransformations\main.cpp(186): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
+d:\mmcs\учеба\7 семестр\графика\лабы\lab12\opengl-viewtransformations\viewtransformations\main.cpp(28): warning C4305: +=: усечение из "double" к "float"
   ViewTransformations.vcxproj -> D:\MMCS\Учеба\7 семестр\Графика\Лабы\lab12\OpenGL-ViewTransformations\ViewTransformations\Debug\ViewTransformations.exe
   ViewTransformations.vcxproj -> D:\MMCS\Учеба\7 семестр\Графика\Лабы\lab12\OpenGL-ViewTransformations\ViewTransformations\Debug\ViewTransformations.pdb (Full PDB)
