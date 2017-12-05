@@ -10,7 +10,8 @@ static int w = 0, h = 0;
 // Ф-ия вызываемая перед вхождением в главный цикл
 void init(void)
 {
-	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+	glClearDepth(1);
 }
 
 
@@ -27,12 +28,10 @@ void update()
 {
 	angleX += 0.007;
 
-	glClear(GL_COLOR_BUFFER_BIT);
+	glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
 
-	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
-
+	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 	glLoadIdentity();
-	gluLookAt(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
 	glRotatef(angleX, 0.0f, 1.0f, 0.0f);
 
 	
@@ -68,7 +67,7 @@ void reshape(int width, int height)
 	glViewport(0, 0, w, h); 
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity(); 
-	gluPerspective(65.0f, w / h, 0.0f, 10.0f);
+	gluPerspective(65.0f, w / h, 0.01f, 10.0f);
 	glMatrixMode(GL_MODELVIEW); 
 
 }
@@ -79,14 +78,15 @@ int main(int argc, char * argv[])
 	glutInit(&argc, argv);
 	glutInitWindowPosition(100, 100);
 	glutInitWindowSize(800, 600);
-	glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_DEPTH);
+	glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH);
 	glutCreateWindow("ViewTransformations");
-
 	glutDisplayFunc(update);
 	glutIdleFunc(update);
 
 	glutReshapeFunc(reshape);
 	init();
+	glEnable(GL_DEPTH_TEST);
+
 	glutMainLoop();
 	return 0;
 }
