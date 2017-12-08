@@ -1,4 +1,4 @@
 ﻿  main.cpp
-d:\mmcs\учеба\7 семестр\графика\лабы\lab12\opengl-viewtransformations\viewtransformations\main.cpp(29): warning C4305: +=: усечение из "double" к "float"
+d:\mmcs\учеба\7 семестр\графика\лабы\lab12\opengl-viewtransformations\viewtransformations\main.cpp(28): warning C4305: +=: усечение из "double" к "float"
   ViewTransformations.vcxproj -> D:\MMCS\Учеба\7 семестр\Графика\Лабы\lab12\OpenGL-ViewTransformations\ViewTransformations\Debug\ViewTransformations.exe
   ViewTransformations.vcxproj -> D:\MMCS\Учеба\7 семестр\Графика\Лабы\lab12\OpenGL-ViewTransformations\ViewTransformations\Debug\ViewTransformations.pdb (Full PDB)

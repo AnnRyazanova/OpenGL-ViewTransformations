@@ -19,7 +19,6 @@ void init(void)
 void solidCube(double size)
 {
 	glutSolidCube(size);
-	//glutWireCube(size);
 }
 
 
@@ -27,31 +26,40 @@ void solidCube(double size)
 void update()
 {
 	angleX += 0.007;
-
 	glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
-
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-	glLoadIdentity();
-	glRotatef(angleX, 0.0f, 1.0f, 0.0f);
 
-	
-	glPushMatrix();
+
 	glLoadIdentity();
-	glTranslatef(0.0f, 0.0f, -1.0f);
-	glRotatef(angleX, 0.0f, 1.0f, 0.0f);
+	gluLookAt(0.0, 0.0, 2.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
+	
+	// поворот всего вокруг центра сцены
+	//glRotatef(angleX, 0.0f, 1.0f, 0.0f);
+
+	// поворот всего вокруг центра пьедестала
+	//glTranslatef(0.5f, 0.0f, 0.0f);
+	//glRotatef(angleX, 0.0f, 1.0f, 0.0f);
+
+	glPushMatrix();
 	glColor3f(0.75f, 0.63f, 0.0f);
+	// поворот : золотой вокруг своей оси
+	//glRotatef(angleX, 0.0f, 1.0f, 0.0f);
 	solidCube(0.3);
+	glPopMatrix();
 	
 	glPushMatrix();
 	glTranslatef(-0.25f, -0.05f, 0.0f);
+	// поворот : серебряный вокруг своей оси
+	//glRotatef(angleX, 0.0f, 1.0f, 0.0f);
 	glColor3f(0.75f, 0.75f, 0.75f);
 	solidCube(0.2);
 	glPopMatrix();
 		
 	glTranslatef(0.24f, -0.06f, 0.0f);
+	// поворот : бронзовый вокруг своей оси
+	//glRotatef(angleX, 0.0f, 1.0f, 0.0f);
 	glColor3f(0.62f, 0.39f, 0.16f);
 	solidCube(0.18);
-	glPopMatrix();
 
 	glFlush();
 	glutSwapBuffers();
