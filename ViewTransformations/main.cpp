@@ -21,6 +21,17 @@ void solidCube(double size)
 	glutSolidCube(size);
 }
 
+// 0 - поворот всего вокруг центра сцены
+// 1 - поворот всего вокруг центра пьедестала
+// 2 - поворот каждого вокруг своей оси 
+int rotationType = 0;
+
+// ‘-и€ изменени€ типа поворота
+void mouseChangeRotation(int button, int state, int x, int y)
+{
+	if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN)
+		rotationType = (rotationType + 1) % 3;
+}
 
 // ‘-и€, вызываема€ каждый кадр
 void update()
@@ -34,30 +45,40 @@ void update()
 	gluLookAt(0.0, 0.0, 2.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
 	
 	// поворот всего вокруг центра сцены
-	//glRotatef(angleX, 0.0f, 1.0f, 0.0f);
+	if (rotationType == 0)
+	{
+		glRotatef(angleX, 0.0f, 1.0f, 0.0f);
+		glTranslatef(0.5f, 0.0f, 0.0f);
+	}
 
 	// поворот всего вокруг центра пьедестала
-	//glTranslatef(0.5f, 0.0f, 0.0f);
-	//glRotatef(angleX, 0.0f, 1.0f, 0.0f);
+	if (rotationType == 1)
+	{
+		glTranslatef(0.5f, 0.0f, 0.0f);
+		glRotatef(angleX, 0.0f, 1.0f, 0.0f);
+	}
 
 	glPushMatrix();
 	glColor3f(0.75f, 0.63f, 0.0f);
 	// поворот : золотой вокруг своей оси
-	//glRotatef(angleX, 0.0f, 1.0f, 0.0f);
+	if (rotationType == 2)
+		glRotatef(angleX, 0.0f, 1.0f, 0.0f);
 	solidCube(0.3);
 	glPopMatrix();
 	
 	glPushMatrix();
 	glTranslatef(-0.25f, -0.05f, 0.0f);
 	// поворот : серебр€ный вокруг своей оси
-	//glRotatef(angleX, 0.0f, 1.0f, 0.0f);
+	if (rotationType == 2)
+		glRotatef(angleX, 0.0f, 1.0f, 0.0f);
 	glColor3f(0.75f, 0.75f, 0.75f);
 	solidCube(0.2);
 	glPopMatrix();
 		
 	glTranslatef(0.24f, -0.06f, 0.0f);
 	// поворот : бронзовый вокруг своей оси
-	//glRotatef(angleX, 0.0f, 1.0f, 0.0f);
+	if (rotationType == 2)
+		glRotatef(angleX, 0.0f, 1.0f, 0.0f);
 	glColor3f(0.62f, 0.39f, 0.16f);
 	solidCube(0.18);
 
@@ -92,6 +113,7 @@ int main(int argc, char * argv[])
 	glutIdleFunc(update);
 
 	glutReshapeFunc(reshape);
+	glutMouseFunc(mouseChangeRotation);
 	init();
 	glEnable(GL_DEPTH_TEST);
 
