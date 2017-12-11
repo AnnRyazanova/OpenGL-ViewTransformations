@@ -1,4 +1,6 @@
 ﻿  main.cpp
-d:\mmcs\учеба\7 семестр\графика\лабы\lab12\opengl-viewtransformations\viewtransformations\main.cpp(39): warning C4305: +=: усечение из "double" к "float"
+d:\mmcs\учеба\7 семестр\графика\лабы\lab12\opengl-viewtransformations\viewtransformations\main.cpp(44): warning C4305: аргумент: усечение из "double" к "GLfloat"
+d:\mmcs\учеба\7 семестр\графика\лабы\lab12\opengl-viewtransformations\viewtransformations\main.cpp(45): warning C4305: аргумент: усечение из "double" к "GLfloat"
+d:\mmcs\учеба\7 семестр\графика\лабы\lab12\opengl-viewtransformations\viewtransformations\main.cpp(60): warning C4305: +=: усечение из "double" к "float"
   ViewTransformations.vcxproj -> D:\MMCS\Учеба\7 семестр\Графика\Лабы\lab12\OpenGL-ViewTransformations\ViewTransformations\Debug\ViewTransformations.exe
   ViewTransformations.vcxproj -> D:\MMCS\Учеба\7 семестр\Графика\Лабы\lab12\OpenGL-ViewTransformations\ViewTransformations\Debug\ViewTransformations.pdb (Full PDB)

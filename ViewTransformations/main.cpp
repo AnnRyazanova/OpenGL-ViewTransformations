@@ -33,6 +33,27 @@ void mouseChangeRotation(int button, int state, int x, int y)
 		rotationType = (rotationType + 1) % 3;
 }
 
+// точечный источник света
+// убывание интенсивности с расстоянием
+// задано функцией f(d) = 1.0 / (0.4 * d * d + 0.2 * d)
+void addPointLight(int light, GLfloat lightPos [], GLfloat lightDiffuse [])
+{
+	glLightfv(light, GL_DIFFUSE, lightDiffuse);
+	glLightfv(light, GL_POSITION, lightPos);
+	glLightf(light, GL_CONSTANT_ATTENUATION, 0.0);
+	glLightf(light, GL_LINEAR_ATTENUATION, 0.2);
+	glLightf(light, GL_QUADRATIC_ATTENUATION, 0.4);
+}
+
+void addSpotlight(int light, GLfloat lightPos[], GLfloat lightDiffuse[], GLfloat lightDirection[])
+{
+	glLightfv(light, GL_DIFFUSE, lightDiffuse);
+	glLightfv(light, GL_POSITION, lightPos);
+	glLightf(light, GL_SPOT_CUTOFF, 30);
+	glLightfv(light, GL_SPOT_DIRECTION, lightDirection);
+	glLightf(light, GL_SPOT_EXPONENT, 15.0);
+}
+
 // Ф-ия, вызываемая каждый кадр
 void update()
 {
@@ -40,9 +61,25 @@ void update()
 	glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 
-
 	glLoadIdentity();
 	gluLookAt(0.0, 0.0, 2.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
+
+	// белый точечный источник света
+	GLfloat light0Position[] = { 0.0, 0.0, 1.0, 1.0 };
+	GLfloat light0Diffuse[] = { 1.0, 1.0, 1.0, 1.0 };
+	addPointLight(GL_LIGHT0, light0Position, light0Diffuse);
+
+	// зеленый точечный источник света
+	GLfloat light1Position[] = { -1.0, 1.0, 0.0, 1.0 };
+	GLfloat light1Diffuse[] = { 0.0, 1.0, 0.0, 1.0 };
+	addPointLight(GL_LIGHT1, light1Position, light1Diffuse);
+
+	// красный прожектор
+	GLfloat light2Diffuse[] = { 1.0, 0.0, 0.0 };
+	GLfloat light2Position[] = { 1.0, 0.0, 0.0, 1.0 };
+	GLfloat light2Direction[] = { -1.0, 0.0, 0.0 };
+	addSpotlight(GL_LIGHT2, light2Position, light2Diffuse, light2Direction);
+
 	
 	// поворот всего вокруг центра сцены
 	if (rotationType == 0)
@@ -54,7 +91,7 @@ void update()
 	// поворот всего вокруг центра пьедестала
 	if (rotationType == 1)
 	{
-		glTranslatef(0.5f, 0.0f, 0.0f);
+		//glTranslatef(0.5f, 0.0f, 0.0f);
 		glRotatef(angleX, 0.0f, 1.0f, 0.0f);
 	}
 
@@ -116,6 +153,12 @@ int main(int argc, char * argv[])
 	glutMouseFunc(mouseChangeRotation);
 	init();
 	glEnable(GL_DEPTH_TEST);
+	glEnable(GL_LIGHTING);
+	glEnable(GL_LIGHT0); // точечный источник света
+	glEnable(GL_LIGHT1); // точечный источник света
+	glEnable(GL_LIGHT2); // прожектор
+	glEnable(GL_COLOR_MATERIAL);
+
 
 	glutMainLoop();
 	return 0;
