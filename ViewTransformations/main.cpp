@@ -1,10 +1,18 @@
 #include <windows.h>
 #include <glew.h>
 #include <freeglut.h>
+#include <cmath>
 
 float angleX = 0.0f;
 
 static int w = 0, h = 0;
+
+// Начальная позиция камеры:
+double cameraX = 0.0, cameraY = 0.0, cameraZ = 2.0;
+// Расстояние от камеры до центра сцены:
+double distCamera = 2.0;
+
+double cameraAngle = 0;
 
 
 // Ф-ия вызываемая перед вхождением в главный цикл
@@ -13,7 +21,6 @@ void init(void)
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 	glClearDepth(1);
 }
-
 
 // Ф-ия построения куба
 void solidCube(double size)
@@ -45,6 +52,7 @@ void addPointLight(int light, GLfloat lightPos [], GLfloat lightDiffuse [])
 	glLightf(light, GL_QUADRATIC_ATTENUATION, 0.4);
 }
 
+// прожектор
 void addSpotlight(int light, GLfloat lightPos[], GLfloat lightDiffuse[], GLfloat lightDirection[])
 {
 	glLightfv(light, GL_DIFFUSE, lightDiffuse);
@@ -52,6 +60,29 @@ void addSpotlight(int light, GLfloat lightPos[], GLfloat lightDiffuse[], GLfloat
 	glLightf(light, GL_SPOT_CUTOFF, 30);
 	glLightfv(light, GL_SPOT_DIRECTION, lightDirection);
 	glLightf(light, GL_SPOT_EXPONENT, 15.0);
+}
+
+// Управление камерой
+void specialKeys(int key, int x, int y)
+{
+	switch (key)
+	{
+	case GLUT_KEY_UP: cameraY += 0.5;
+		break;
+	case GLUT_KEY_DOWN:	cameraY -= 0.5;
+		break;
+	case GLUT_KEY_LEFT:
+		cameraAngle += 0.5;
+		cameraX = distCamera * cos(cameraAngle);
+		cameraZ = distCamera * sin(cameraAngle);
+		break;
+	case GLUT_KEY_RIGHT:
+		cameraAngle -= 0.5;
+		cameraX = -distCamera * cos(cameraAngle);
+		cameraZ = -distCamera * sin(cameraAngle);
+		break;
+	}
+	glutPostRedisplay();
 }
 
 // Ф-ия, вызываемая каждый кадр
@@ -62,7 +93,8 @@ void update()
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 
 	glLoadIdentity();
-	gluLookAt(0.0, 0.0, 2.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
+	//gluLookAt(0.0, 0.0, 2.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
+	gluLookAt(cameraX, cameraY, cameraZ, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
 
 	// белый точечный источник света
 	GLfloat light0Position[] = { 0.0, 0.0, 1.0, 1.0 };
@@ -151,6 +183,8 @@ int main(int argc, char * argv[])
 
 	glutReshapeFunc(reshape);
 	glutMouseFunc(mouseChangeRotation);
+	glutSpecialFunc(specialKeys);
+
 	init();
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_LIGHTING);
